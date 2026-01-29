@@ -39,15 +39,38 @@
                         @grupo.TotalVenda.ToString("C")
                     </span>
 
-                    <form method="post" asp-page-handler="CancelarCompra" class="m-0">
-                        @* Formato ISO "O" garante que o servidor encontre a data exata no SQLite *@
-                        <input type="hidden" name="dataCompra" value="@grupo.Data.ToString("O")" />
+                    <button type="button" class="btn btn-danger btn-sm px-3 shadow-sm d-flex align-items-center"
+                            data-bs-toggle="modal" data-bs-target="#modalCancelar-@grupo.Data.Ticks">
+                        <i class="bi bi-trash3 me-1"></i> Cancelar
+                    </button>
+                </div>
+                <div class="modal fade" id="modalCancelar-@grupo.Data.Ticks" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content border-0 shadow">
+                            <div class="modal-header bg-danger text-white">
+                                <h5 class="modal-title"><i class="bi bi-exclamation-triangle me-2"></i> Confirmar Estorno</h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body p-4 text-center">
+                                <i class="bi bi-arrow-counterclockwise text-danger display-1 mb-3"></i>
+                                <p class="fs-5">Deseja realmente cancelar esta venda?</p>
+                                <p class="text-muted small">Os itens serão devolvidos ao estoque e o registro financeiro será removido.</p>
+                                <div class="alert alert-secondary py-2 small">
+                                    <strong>Venda de:</strong> @grupo.Data.ToString("dd/MM/yyyy HH:mm:ss")
+                                </div>
+                            </div>
+                            <div class="modal-footer bg-light justify-content-center">
+                                <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">Manter Venda</button>
 
-                        <button type="submit" class="btn btn-danger btn-sm px-3 shadow-sm d-flex align-items-center"
-                                onclick="return confirm('ATENÇÃO: Deseja estornar todos os itens desta compra e devolver ao estoque?')">
-                            <i class="bi bi-trash3 me-1"></i> Cancelar
-                        </button>
-                    </form>
+                                <form method="post" asp-page-handler="CancelarCompra" class="m-0">
+                                    <input type="hidden" name="dataCompra" value="@grupo.Data.ToString("O")" />
+                                    <button type="submit" class="btn btn-danger px-4">
+                                        <i class="bi bi-check-lg"></i> Confirmar Cancelamento
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
