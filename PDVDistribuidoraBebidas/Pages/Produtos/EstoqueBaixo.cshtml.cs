@@ -10,7 +10,10 @@ namespace PDVDistribuidoraBebidas.Pages.Produtos
     public class EstoqueBaixoModel : PageModel
     {
         private readonly PDVDistribuidoraBebidasContext _context;
-        public EstoqueBaixoModel(PDVDistribuidoraBebidasContext context) => _context = context;
+        public EstoqueBaixoModel(PDVDistribuidoraBebidasContext context)
+        {
+            _context = context;
+        }
 
         public List<Produto> ProdutosCriticos { get; set; }
 
