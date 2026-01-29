@@ -49,6 +49,6 @@ O sistema foi modelado para atender aos seguintes requisitos:
 
 👤 Autor
 
-    Lucas Vasconcelos Evangelista - Desenvolvedor e Estudante de Sistemas de Informação - Seu GitHub
+    Lucas Vasconcelos Evangelista - Desenvolvedor e Estudante de Sistemas de Informação
 
     Nota: Este projeto foi desenvolvido para fins acadêmicos. Sinta-se à vontade para clonar e sugerir melhorias!
