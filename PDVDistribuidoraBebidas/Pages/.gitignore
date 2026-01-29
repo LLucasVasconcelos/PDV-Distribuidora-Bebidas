@@ -1,0 +1,22 @@
+# Pastas de Compilação
+bin/
+obj/
+
+# Banco de Dados SQLite local
+*.db
+*.db-shm
+*.db-wal
+
+# Configurações do Visual Studio / VS Code
+.vs/
+.vscode/
+*.user
+*.suo
+*.sln.docstates
+
+# Arquivos de log e temporários
+*.log
+.DS_Store (para Mac)
+
+# Publicação
+publish/
