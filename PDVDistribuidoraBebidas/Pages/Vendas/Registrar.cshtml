@@ -1,61 +1,120 @@
 ﻿@page
 @model RegistrarModel
+@{
+    ViewData["Title"] = "Ponto de Venda";
+}
 
-<h2>Ponto de Venda (PDV)</h2>
-
-<div class="card p-3 mb-4">
-    <form method="post" asp-page-handler="Adicionar">
-        <div class="row">
-            <div class="col-md-6">
-                <select name="produtoId" class="form-control" required>
-                    @foreach (var p in Model.ProdutosDisponiveis)
-                    {
-                        <option value="@p.Id">@p.Nome (@p.Preco.ToString("C"))</option>
-                    }
-                </select>
+<div class="container py-4">
+    <div class="row mb-4">
+        <div class="col-12 d-flex align-items-center">
+            <div class="bg-primary text-white p-3 rounded-3 me-3 shadow-sm">
+                <i class="bi bi-cart-fill fs-3"></i>
             </div>
-            <div class="col-md-3">
-                <input type="number" name="quantidade" value="1" min="1" class="form-control" />
-            </div>
-            <div class="col-md-3">
-                <button type="submit" class="btn btn-info w-100">Adicionar Item</button>
+            <div>
+                <h2 class="mb-0 fw-bold">Ponto de Venda (PDV)</h2>
+                <p class="text-muted mb-0">Adicione os itens e finalize a venda do cliente.</p>
             </div>
         </div>
-    </form>
+    </div>
+
+    @if (TempData["Mensagem"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
+            <i class="bi bi-check-circle-fill me-2"></i> @TempData["Mensagem"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-header bg-dark text-white fw-bold py-3">
+                    <i class="bi bi-plus-lg me-2"></i> Selecionar Produto
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-page-handler="Adicionar">
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Bebida</label>
+                            <select name="produtoId" class="form-select" required>
+                                <option value="" disabled selected>Escolha um produto...</option>
+                                @foreach (var p in Model.ProdutosDisponiveis)
+                                {
+                                    <option value="@p.Id">@p.Nome (@p.Preco.ToString("C")) - Estoque: @p.Quantidade</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">Quantidade</label>
+                            <input type="number" name="quantidade" value="1" min="1" class="form-control" />
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 py-2 fw-bold shadow-sm">
+                            <i class="bi bi-plus-circle me-1"></i> Adicionar Item
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-light fw-bold py-3 d-flex justify-content-between align-items-center">
+                    <span><i class="bi bi-list-ul me-2"></i> Itens da Compra</span>
+                    <span class="badge bg-secondary">@RegistrarModel.Carrinho.Count Itens</span>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="bg-light text-muted small text-uppercase">
+                                <tr>
+                                    <th class="ps-4 py-3">Produto</th>
+                                    <th class="text-center">Qtd</th>
+                                    <th class="text-end">Preço Un.</th>
+                                    <th class="text-end pe-4">Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (!RegistrarModel.Carrinho.Any())
+                                {
+                                    <tr>
+                                        <td colspan="4" class="text-center py-5 text-muted">
+                                            <i class="bi bi-cart-x fs-2 d-block mb-2"></i>
+                                            Carrinho vazio. Adicione itens para começar.
+                                        </td>
+                                    </tr>
+                                }
+                                @foreach (var item in RegistrarModel.Carrinho)
+                                {
+                                    <tr>
+                                        <td class="ps-4 fw-bold">@item.Nome</td>
+                                        <td class="text-center">@item.Quantidade</td>
+                                        <td class="text-end">@item.PrecoUnitario.ToString("C")</td>
+                                        <td class="text-end pe-4 fw-bold text-primary">@item.Subtotal.ToString("C")</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                @if (RegistrarModel.Carrinho.Any())
+                {
+                    <div class="card-footer bg-white border-top-0 p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h4 class="mb-0 text-muted">Total Final:</h4>
+                            <h2 class="mb-0 fw-bold text-success">@Model.TotalVenda.ToString("C")</h2>
+                        </div>
+                        <form method="post" asp-page-handler="Finalizar">
+                            <button type="submit" class="btn btn-success btn-lg w-100 py-3 fw-bold shadow">
+                                <i class="bi bi-check2-all me-2"></i> Confirmar e Finalizar Compra
+                            </button>
+                        </form>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
 </div>
 
-<h4>Itens da Venda Atual</h4>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Produto</th>
-            <th>Qtd</th>
-            <th>Preço Un.</th>
-            <th>Subtotal</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in RegistrarModel.Carrinho)
-        {
-            <tr>
-                <td>@item.Nome</td>
-                <td>@item.Quantidade</td>
-                <td>@item.PrecoUnitario.ToString("C")</td>
-                <td>@item.Subtotal.ToString("C")</td>
-            </tr>
-        }
-    </tbody>
-    <tfoot>
-        <tr>
-            <th colspan="3" class="text-end">VALOR FINAL:</th>
-            <th class="table-primary">@Model.TotalVenda.ToString("C")</th>
-        </tr>
-    </tfoot>
-</table>
-
-@if (RegistrarModel.Carrinho.Any())
-{
-    <form method="post" asp-page-handler="Finalizar">
-        <button type="submit" class="btn btn-success btn-lg w-100">Confirmar e Finalizar Compra</button>
-    </form>
+@section Scripts {
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
 }

@@ -4,6 +4,9 @@ body {
     background-color: #f8f9fa; /* Fundo levemente cinza para destacar os cards brancos */
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     padding-bottom: 70px;
+    margin-bottom: 70px;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Estilização da Navbar */
@@ -71,8 +74,16 @@ body {
 
 /* Rodapé fixo mas elegante */
 .footer {
-    position: fixed;
+    position: absolute;
     bottom: 0;
     width: 100%;
-    z-index: 1000;
+    height: 60px; 
+    line-height: 60px; 
+    background-color: white;
+    border-top: 1px solid #dee2e6;
+    z-index: 1030;
+}
+html {
+    position: relative;
+    min-height: 100%;
 }
