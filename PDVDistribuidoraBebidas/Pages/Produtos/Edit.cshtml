@@ -1,0 +1,94 @@
+﻿@page
+@model PDVDistribuidoraBebidas.Pages.Produtos.EditModel
+
+@{
+    ViewData["Title"] = "Editar Produto";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+
+            <div class="mb-3">
+                <a asp-page="./Index" class="text-decoration-none text-secondary">
+                    <i class="bi bi-arrow-left"></i> Voltar para o estoque
+                </a>
+            </div>
+
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-warning text-dark py-3">
+                    <h4 class="mb-0 fw-bold">
+                        <i class="bi bi-pencil-square me-2"></i> Editar Produto
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <form method="post">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger p-2 small"></div>
+
+                        <input type="hidden" asp-for="Produto.Id" />
+
+                        <div class="mb-3">
+                            <label asp-for="Produto.Nome" class="form-label fw-bold"></label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-fonts"></i></span>
+                                <input asp-for="Produto.Nome" class="form-control" />
+                            </div>
+                            <span asp-validation-for="Produto.Nome" class="text-danger small"></span>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Produto.Preco" class="form-label fw-bold"></label>
+                                <div class="input-group">
+                                    <span class="input-group-text">R$</span>
+                                    <input asp-for="Produto.Preco" class="form-control" />
+                                </div>
+                                <span asp-validation-for="Produto.Preco" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Produto.Quantidade" class="form-label fw-bold"></label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-123"></i></span>
+                                    <input asp-for="Produto.Quantidade" class="form-control" />
+                                </div>
+                                <span asp-validation-for="Produto.Quantidade" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <div class="bg-light p-3 rounded mb-4 border-start border-warning border-4">
+                            <small class="text-muted d-block">Identificador Único:</small>
+                            <strong>#@Model.Produto.Id</strong>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-warning btn-lg fw-bold text-dark shadow-sm">
+                                <i class="bi bi-save"></i> Salvar Alterações
+                            </button>
+                            <a asp-page="./Details" asp-route-id="@Model.Produto.Id" class="btn btn-outline-secondary">
+                                Cancelar e Ver Detalhes
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            @* Alerta contextual caso o estoque esteja baixo durante a edição *@
+            @if (Model.Produto.Quantidade < 10)
+            {
+                <div class="alert alert-warning mt-4 d-flex align-items-center shadow-sm" role="alert">
+                    <i class="bi bi-exclamation-triangle-fill me-2 fs-4"></i>
+                    <div>
+                        <strong>Atenção:</strong> Este produto está com estoque crítico. Considere realizar a reposição agora.
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

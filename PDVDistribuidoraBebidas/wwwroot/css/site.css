@@ -1,0 +1,78 @@
+/* Customização Visual do Projeto */
+
+body {
+    background-color: #f8f9fa; /* Fundo levemente cinza para destacar os cards brancos */
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    padding-bottom: 70px;
+}
+
+/* Estilização da Navbar */
+.navbar {
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+}
+
+.navbar-brand {
+    font-size: 1.4rem;
+    letter-spacing: -0.5px;
+}
+
+.nav-link {
+    font-size: 0.95rem;
+    margin-right: 5px;
+    transition: all 0.2s;
+}
+
+    .nav-link:hover {
+        color: #ffc107 !important; /* Destaque amarelo no hover */
+    }
+
+/* Cards e Tabelas */
+.card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.card-header {
+    border-bottom: none;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+    .table thead th {
+        background-color: #f1f3f5;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 0.8px;
+        font-weight: 700;
+        color: #495057;
+        border: none;
+    }
+
+/* Botões Modernos */
+.btn {
+    border-radius: 10px;
+    font-weight: 600;
+    padding: 0.5rem 1.2rem;
+    transition: transform 0.2s;
+}
+
+    .btn:active {
+        transform: scale(0.95);
+    }
+
+/* Efeito de listras nas tabelas */
+.table-hover tbody tr:hover {
+    background-color: rgba(13, 110, 253, 0.04);
+}
+
+/* Rodapé fixo mas elegante */
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 1000;
+}

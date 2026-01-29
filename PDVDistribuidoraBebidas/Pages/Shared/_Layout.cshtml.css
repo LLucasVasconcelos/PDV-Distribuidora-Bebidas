@@ -1,0 +1,90 @@
+﻿/* wwwroot/css/site.css */
+
+/* 1. Estilos de Base */
+body {
+    background-color: #f4f7f6; /* Um cinza bem claro para destacar os Cards brancos */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-bottom: 60px;
+}
+
+/* 2. Customização da Navbar */
+.navbar {
+    border-bottom: none !important;
+}
+
+.navbar-brand {
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+/* 3. Cards e Tabelas */
+.card {
+    border-radius: 12px;
+    overflow: hidden; /* Garante que as bordas da tabela acompanhem o arredondamento do card */
+    transition: transform 0.2s ease-in-out;
+}
+
+.table thead th {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    border-top: none;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(13, 110, 253, 0.05); /* Azul clarinho ao passar o mouse */
+}
+
+/* 4. Botões e Ações */
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+    .btn:hover {
+        transform: translateY(-1px); /* Levanta levemente o botão ao passar o mouse */
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+/* 5. Inputs e Formulários */
+.form-control, .form-select {
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    border: 1px solid #ced4da;
+}
+
+    .form-control:focus {
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+    }
+
+.input-group-text {
+    border-radius: 8px 0 0 8px;
+    background-color: #f8f9fa;
+}
+
+/* 6. Utilidades e Badges */
+.badge {
+    padding: 0.5em 0.8em;
+    font-weight: 600;
+}
+
+.progress {
+    background-color: #e9ecef;
+    border-radius: 10px;
+}
+
+.progress-bar {
+    border-radius: 10px;
+}
+
+/* 7. Estilo para o Rodapé */
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px;
+    background-color: #ffffff;
+}

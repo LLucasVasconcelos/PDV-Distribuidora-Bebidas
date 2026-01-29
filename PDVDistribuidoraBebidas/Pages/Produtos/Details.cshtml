@@ -1,0 +1,87 @@
+﻿@page
+@model PDVDistribuidoraBebidas.Pages.Produtos.DetailsModel
+
+@{
+    ViewData["Title"] = "Detalhes do Produto";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <a asp-page="./Index" class="btn btn-link text-decoration-none p-0">
+                    <i class="bi bi-arrow-left"></i> Voltar para o Estoque
+                </a>
+                <span class="badge @(Model.Produto.Quantidade < 10 ? "bg-danger" : "bg-success") px-3 py-2">
+                    @(Model.Produto.Quantidade < 10 ? "Estoque Crítico" : "Em Estoque")
+                </span>
+            </div>
+
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-white border-bottom py-3">
+                    <h3 class="card-title mb-0 fw-bold text-primary">
+                        <i class="bi bi-info-circle me-2"></i> Ficha Técnica: @Model.Produto.Nome
+                    </h3>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row mb-4">
+                        <div class="col-sm-4 text-center border-end d-none d-sm-block">
+                            <i class="bi bi-box-seam-fill text-light-emphasis" style="font-size: 6rem;"></i>
+                        </div>
+                        <div class="col-sm-8 ps-sm-5">
+                            <dl class="row mb-0">
+                                <dt class="col-sm-4 text-muted text-uppercase small">Nome do Produto</dt>
+                                <dd class="col-sm-8 fs-5 fw-semibold">@Model.Produto.Nome</dd>
+
+                                <hr class="my-2 opacity-25">
+
+                                <dt class="col-sm-4 text-muted text-uppercase small">Preço Unitário</dt>
+                                <dd class="col-sm-8 fs-5 text-success">@Model.Produto.Preco.ToString("C")</dd>
+
+                                <hr class="my-2 opacity-25">
+
+                                <dt class="col-sm-4 text-muted text-uppercase small">Saldo Atual</dt>
+                                <dd class="col-sm-8 fs-5">
+                                    <span class="fw-bold">@Model.Produto.Quantidade</span>
+                                    <span class="text-muted small">unidades</span>
+                                </dd>
+
+                                <hr class="my-2 opacity-25">
+
+                                <dt class="col-sm-4 text-muted text-uppercase small">ID Interno</dt>
+                                <dd class="col-sm-8 text-muted">#@Model.Produto.Id</dd>
+                            </dl>
+                        </div>
+                    </div>
+
+                    <div class="bg-light p-3 rounded-3 border mb-4">
+                        <div class="row text-center">
+                            <div class="col">
+                                <small class="text-muted d-block">Valor Total em Estoque</small>
+                                <strong class="fs-5">@((Model.Produto.Preco * Model.Produto.Quantidade).ToString("C"))</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <a asp-page="./Edit" asp-route-id="@Model.Produto.Id" class="btn btn-warning flex-grow-1">
+                            <i class="bi bi-pencil-square"></i> Editar Dados
+                        </a>
+                        <a asp-page="/Vendas/Registrar" class="btn btn-outline-primary flex-grow-1">
+                            <i class="bi bi-cart-plus"></i> Realizar Venda
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-4 text-muted small">
+                Última consulta realizada em @DateTime.Now.ToString("dd/MM/yyyy HH:mm")
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+}

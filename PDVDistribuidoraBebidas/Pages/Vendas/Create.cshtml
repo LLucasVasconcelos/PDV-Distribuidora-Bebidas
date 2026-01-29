@@ -1,0 +1,48 @@
+﻿@page
+@model PDVDistribuidoraBebidas.Pages.Vendas.CreateModel
+
+        @{
+        ViewData["Title"] = "Create";
+        }
+        
+        <h1>Create</h1>
+        
+    <h4>Venda</h4>
+    <hr />
+    <div class="row">
+    <div class="col-md-4">
+    <form method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Venda.ProdutoId" class="control-label"></label>
+                <select asp-for="Venda.ProdutoId" class ="form-control" asp-items="ViewBag.ProdutoId" ></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Venda.QuantidadeVendida" class="control-label"></label>
+                <input asp-for="Venda.QuantidadeVendida" class="form-control" />
+                <span asp-validation-for="Venda.QuantidadeVendida" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Venda.ValorTotal" class="control-label"></label>
+                <input asp-for="Venda.ValorTotal" class="form-control" />
+                <span asp-validation-for="Venda.ValorTotal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Venda.DataVenda" class="control-label"></label>
+                <input asp-for="Venda.DataVenda" class="form-control" />
+                <span asp-validation-for="Venda.DataVenda" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
